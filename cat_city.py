@@ -29,11 +29,14 @@ def insert(url):
 
     provinces = div[0].find_all('h2')
     # print(div_one)
-    i = 4
+    i = 0
     for province in provinces:
         # print(province.encode('utf-8'))
-        # print(province.next_sibling)
         i += 1
+        province_name = province.get_text()
+        province_pinyin = province.find('a')['href'].lstrip('/province').rstrip('/')
+        query = "insert into `provinces`( `province`, `province_pinyin`) values (%s,%s);" % (province_name,province_pinyin)
+        print(query)
         if i <= 4 :
             cities = province.next_sibling.find_all('a')
             for city in cities:
@@ -47,15 +50,15 @@ def insert(url):
             cities = province.next_sibling.find_all('h3')
             for city in cities:
                 city_name = city.find_all('a')[0]
-                print(city_name)
+                # print(city_name)
                 counties_list = city.find_next_siblings()
                 for county in counties_list:
                     if county.name == "h3":
                         break
-                    print(county.get_text())
+                    # print(county.get_text())
         
 
-    #     query = "insert into `csdn_note` values(0,'"+MySQLdb.escape_string(insert_title)+"','"+MySQLdb.escape_string(insert_author)+"','"+MySQLdb.escape_string(insert_content)+"');"
+        
     #     # print(query)
     #     cursor.execute(query)
     #     conn.commit()
