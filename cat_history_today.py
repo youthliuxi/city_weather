@@ -18,7 +18,7 @@ def getHtml(url):
 
 
 def insert(url_md):
-    conn = mysql.connector.connect(user='root', password='', database='city_weather') 
+    conn = mysql.connector.connect(user='root', password='612', database='city_weather') 
     cursor = conn.cursor()
     url = "http://www.tianqi.com/index.php?c=history&md=%s" % url_md
     html = getHtml(url)
